@@ -29,6 +29,7 @@ import Data.Functor.Contravariant.Divisible
 import Data.Word
 import Data.Hashable
 import qualified Data.Text as T
+import Frames.Orphans 
 
 
 mergeRec :: forall fs rs rs2 rs2'.
@@ -45,22 +46,6 @@ mergeRec rec1 rec2 =
   where
     rec2' = rcast @rs2' rec2 
 
-instance (AllCols Grouping rs
-         , Grouping (Record rs)
-         , Grouping (s :-> r)
-         , Grouping r
-         ) =>
-         Grouping (Record ((s :-> r) : rs)) where
-  grouping = divide recUncons grouping grouping
-
-instance Grouping (Record '[]) where
-  grouping = conquer
-
-instance (Grouping a) => Grouping (s :-> a) where
-   grouping = contramap getCol grouping
-
-instance Grouping Text where
-  grouping = contramap hash grouping
 
 -- | Perform an inner join operation on two frames.
 --
