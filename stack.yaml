@@ -5,6 +5,7 @@ packages:
 flags:
   Frames:
     demos: false
+extra-deps: [diagrams-rasterific-1.4, criterion-1.4.0.0, deepseq-1.4.3.0]
 extra-package-dbs: []
 nix:
   shell-file: shell.nix
